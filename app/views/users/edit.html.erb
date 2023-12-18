@@ -1,0 +1,27 @@
+<!-- app/views/users/edit.html.erb -->
+
+<h1>Edit Profile</h1>
+
+<%= form_with(model: current_user, url: user_path(current_user), method: :patch, local: true) do |form| %>
+  <!-- 名前のフィールド -->
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <!-- 画像のアップロード -->
+  <div class="field">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+  </div>
+
+  <!-- 自己紹介文のフィールド -->
+  <div class="field">
+    <%= form.label :introduction %>
+    <%= form.text_area :introduction %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Update Profile" %>
+  </div>
+<% end %>
