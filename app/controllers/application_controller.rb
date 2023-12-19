@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # ログイン後に遷移させたいパスを返します
-    user_path(current_user.)
+    user_path(current_user.id)
   end
   
   protected

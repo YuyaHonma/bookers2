@@ -1,0 +1,26 @@
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+      
+      <%= form_with(model: @book, local: true) do |form| %>
+        <!-- タイトルの表示 -->
+        <h4>Title</h4>
+        <%= form.text_field :title %>
+        
+        <!-- オピニオンの表示 -->
+        <h4>Opinion</h4>
+        <%= form.text_area :body %>
+        
+        <!-- フォームの送信ボタン -->
+        <%= form.submit 'Update Book' %>
+      <% end %>
+      
+      <%= link_to 'Show', @book %>
+      |
+      <%= link_to 'Back', books_path %>
+      
+    </div>
+  </div>
+</div>

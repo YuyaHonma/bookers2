@@ -1,13 +1,20 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  def show
-    # @user は before_action でセットされるため、ここでは追加の処理は不要です
+  def index
+    # index アクションの実装
+    @users = User.all
   end
-
-  private
-
-  def set_user
+  def show
     @user = User.find(params[:id])
+  end
+  private
+  def set_user
+    @user = User.find_by(id: params[:id])
+
+    unless @user
+      flash[:alert] = "User not found"
+      redirect_to root_path
+    end
   end
 end

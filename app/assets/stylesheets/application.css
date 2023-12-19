@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+a {
+  text-decoration: none; /* リンクの下線をなくす */
+}
+
+a:hover {
+  text-decoration: underline; /* マウスがリンクに乗った時に下線を表示 */
+}
