@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :books  # ネストされたリソースとしてbooksを設定
   end
-  resources :books, only: [:new, :index, :show, :update, :destroy]
-  resources :users, only: [:show, :edit, :update]
+  resources :books, only: [:index, :create, :show, :update, :destroy]
+  resources :users, only: [:index, :show, :edit, :update]
 end

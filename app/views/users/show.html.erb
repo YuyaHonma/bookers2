@@ -1,22 +1,34 @@
-<!-- app/views/users/show.html.erb -->
+<div class="container">
+  <div class="row">
+    <!-- ユーザー情報 -->
+    <%= render 'books/user_info', user: @user %>
 
-<h1>User info</h1>
+    <!-- 投稿フォーム -->
+    <%= render 'books/book_form', book: @book, user: current_user %>
 
-<% if @user.present? %>
-  <!-- 名前の表示 -->
-  <p><strong>Name:</strong> <%= @user.name %></p>
-
-  <!-- 画像の表示 -->
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar.variant(resize: "100x100") %>
-  <% else %>
-    <%= image_tag "no_image.jpg", alt: "No Image", width: 100, height: 100 %>
-  <% end %>
-
-  <!-- 自己紹介文の表示 -->
-  <p><strong>Introduction:</strong> <%= @user.introduction %></p>
-
-  <%= link_to "Update user", edit_user_path(@user), class: "btn btn-primary" %>
-<% else %>
-  <p>User not found</p>
-<% end %>
+    <h3>Books</h3>
+    <table class="table">
+          <!-- テーブルのボディ -->
+          <tbody>
+            <% @books.each do |book| %>
+              <tr>
+                <td>
+                  <%= link_to user_path(book.user) do %>
+                    <% if book.user.avatar.attached? %>
+                      <%= image_tag book.user.avatar.variant(resize: "80x80"), class: "img-thumbnail" %>
+                    <% else %>
+                      <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 80, height: 80 %>
+                    <% end %>
+                    <br>
+                    <%= book.user.name %>
+                  <% end %>
+                </td>
+                <td><%= book.title %></td>
+                <td><%= book.body %></td>
+                <!-- Edit と Destroy ボタン -->
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>

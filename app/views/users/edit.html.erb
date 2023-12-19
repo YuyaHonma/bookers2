@@ -1,6 +1,6 @@
 <!-- app/views/users/edit.html.erb -->
 
-<h1>Edit Profile</h1>
+<h1>User info</h1>
 
 <%= form_with(model: current_user, url: user_path(current_user), method: :patch, local: true) do |form| %>
   <!-- 名前のフィールド -->
@@ -11,8 +11,8 @@
 
   <!-- 画像のアップロード -->
   <div class="field">
-    <%= form.label :avatar %>
-    <%= form.file_field :avatar %>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
   </div>
 
   <!-- 自己紹介文のフィールド -->

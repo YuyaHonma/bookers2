@@ -3,11 +3,13 @@
   <tr>
     <td>
       <!-- ユーザーの写真 -->
-      <% if user.avatar.attached? %>
-        <%= image_tag user.avatar.variant(resize: "100x100"), class: "img-thumbnail" %>
-      <% else %>
-        <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 100, height: 100 %>
-      <% end %>
+      <div class="user-info">
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar.variant(resize: "100x100"), class: "img-thumbnail" %>
+  <% else %>
+    <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 100, height: 100 %>
+  <% end %>
+</div>
     </td>
   </tr>
   <tr>
@@ -18,10 +20,11 @@
     <th>Introduction</th>
     <td><%= user.introduction %></td>
   </tr>
+  <tr>
+    <td colspan="2">
+      <%= link_to edit_user_path(user) do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
+    </td>
+  </tr>
 </table>
-
-<div class="row">
-  <a class="btn btn-outline-secondary btn-block edit_user_<%= user.id %>" href="/users/<%= user.id %>/edit">
-    Edit
-  </a>
-</div>

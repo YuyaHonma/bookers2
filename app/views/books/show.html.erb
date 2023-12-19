@@ -1,55 +1,51 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'user_info', user: current_user %>
+      <%= render 'user_info', user: @book.user %>
     </div>
     <div class="col-md-9">
-      <%= render 'book_form', book: @book, user: current_user %>
-
       <!-- Books -->
       <div class="col-md-9">
         <!-- Book detail -->
         <h2>Book detail</h2>
         
-        <% if @book.user == current_user %>
-          <table class="table">
-            <!-- テーブルのボディ -->
-            <tbody>
-              <tr>
+        <table class="table">
+          <!-- テーブルのボディ -->
+          <tbody>
+            <tr>
+              <td>
+                <% if @book.user.avatar.attached? %>
+                  <%= link_to user_path(@book.user) do %>
+                    <%= image_tag @book.user.avatar.variant(resize: "80x80"), class: "img-thumbnail" %>
+                    <br>
+                    <%= @book.user.name %>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_path(@book.user) do %>
+                    <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 80, height: 80 %>
+                    <br>
+                    <%= @book.user.name %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= @book.title %></td>
+              <td><%= @book.body %></td>
+              <!-- Edit と Destroy ボタン -->
+              <% if @book.user == current_user %>
                 <td>
-                  <% if @book.user.avatar.attached? %>
-                    <%= link_to user_path(@book.user) do %>
-                      <%= image_tag @book.user.avatar.variant(resize: "80x80"), class: "img-thumbnail" %>
-                      <br>
-                      <%= @book.user.name %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to user_path(@book.user) do %>
-                      <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 80, height: 80 %>
-                      <br>
-                      <%= @book.user.name %>
-                    <% end %>
+                  <%= link_to edit_user_book_path(current_user, @book), class: "btn btn-outline-secondary btn-sm" do %>
+                    Edit
                   <% end %>
                 </td>
-                <td><%= @book.title %></td>
-                <td><%= @book.body %></td>
-                <!-- Edit と Destroy ボタン -->
-                <% if @book.user == current_user %>
-                  <td>
-                    <%= link_to edit_user_book_path(current_user, @book), class: "btn btn-outline-secondary btn-sm" do %>
-                      Edit
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= link_to user_book_path(current_user, @book), method: :delete, data: { confirm: '本当に消しますか?' } do %>
-                      Destroy
-                      <% end %>
-                  </td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
-        <% end %>
+                <td>
+                  <%= link_to user_book_path(current_user, @book), method: :delete, data: { confirm: '本当に消しますか?' } do %>
+                    Destroy
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
