@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-    
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update]
+
   def index
     @books = Book.all
     @book = Book.new
@@ -25,12 +27,9 @@ class BooksController < ApplicationController
   end
   
   def edit
-    @book = Book.find(params[:id])
   end
   
   def update
-    @book = Book.find(params[:id])
-
     if @book.update(book_params)
       flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book)
@@ -40,7 +39,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
     redirect_to books_path
   end
@@ -49,5 +47,16 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  def authorize_user
+    unless @book.user == current_user
+      flash[:alert] = "他人の投稿を編集する権限がありません。"
+      redirect_to books_path
+    end
   end
 end
