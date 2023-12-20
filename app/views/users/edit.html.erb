@@ -2,6 +2,15 @@
 
 <h1>User info</h1>
 
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>error prohibited this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with(model: current_user, url: user_path(current_user), method: :patch, local: true) do |form| %>
   <!-- 名前のフィールド -->
   <div class="field">

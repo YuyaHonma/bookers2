@@ -1,9 +1,20 @@
-<!-- index.html.erb -->
+<% if @book.errors.any? %>
+  <div class="alert alert-danger">
+    <%= pluralize(@book.errors.count, "error") %> prohibited this object from being saved:
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <div class="container">
   <div class="row">
     <%= render 'user_info', user: current_user %>
+      <!-- 新しい本のフォーム -->
     <%= render 'book_form', book: @book, user: current_user %>
+  </div>
 
     <h2>Books</h2>
     <table class="table">
