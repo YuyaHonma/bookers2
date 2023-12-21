@@ -42,10 +42,9 @@ class UsersController < ApplicationController
   end
 
   def is_matching_login_user
-    # データベースを再びクエリする代わりに @user を使用します
     unless @user.id == current_user.id
       flash[:alert] = "他のユーザーのプロフィールを編集する権限がありません。"
-      redirect_to user_path(@user.id) # showページにリダイレクトするよう修正
+      redirect_to user_path(current_user.id) # ログインユーザーの詳細画面にリダイレクト
     end
   end
 end
