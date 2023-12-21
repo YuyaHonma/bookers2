@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_one_attached :avatar # Active Storage を使用して画像をアタッチ
   
+  validates :name, uniqueness: true, length: { minimum: 2, maximum: 20 }
+  validates :introduction, length: { maximum: 50 } 
+  
   def get_profile_image(width, height)
   unless profile_image.attached?
     file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
@@ -15,7 +18,4 @@ class User < ApplicationRecord
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
 end
-  
-  validates :name, uniqueness: true, length: { in: 2..20 }
-  validates :introduction, length: { maximum: 15 } # 例: 最大15文字の自己紹介文
 end

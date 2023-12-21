@@ -1,30 +1,35 @@
-<h2>User info</h2>
-<table class="table">
-  <tr>
-    <td>
-      <!-- ユーザーの写真 -->
-      <div class="user-info">
-  <% if user.avatar.attached? %>
-    <%= image_tag user.avatar.variant(resize: "100x100"), class: "img-thumbnail" %>
-  <% else %>
-    <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 100, height: 100 %>
-  <% end %>
-</div>
-    </td>
-  </tr>
-  <tr>
-    <th>Name</th>
-    <td><%= user.name %></td>
-  </tr>
-  <tr>
-    <th>Introduction</th>
-    <td><%= user.introduction %></td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <%= link_to edit_user_path(user) do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
-    </td>
-  </tr>
-</table>
+<h2 style="white-space: nowrap;">User info</h2>
+      <table class="table table-striped">
+          <tr>
+            <td>
+              <!-- ユーザーの写真 -->
+              <div class="user-info">
+                <% if user.avatar.attached? %>
+                  <%= image_tag user.avatar.variant(resize: "100x100"), class: "img-thumbnail" %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", alt: "No Image", class: "img-thumbnail", width: 100, height: 100 %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>name</th>
+            <td><%= user.name %></td>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <td><%= user.introduction %></td>
+          </tr>
+          <!-- 移動した部分 -->
+          <tr>
+            <td>
+              <div class='row'>
+             <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block edit_user_#{current_user.id}" do %>
+              <i class="fas fa-user-cog"></i>
+             <% end %>
+             </div>
+            </td>
+          </tr>
+          <!-- 移動した部分 -->
+        </table>
+

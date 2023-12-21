@@ -1,34 +1,49 @@
-<h2>Sign up</h2>
+<main>
+  <p id="notice"><%= notice %></p>
+  <div class='container'>
+    <div class='row'>
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+        <h2>Sign up</h2>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_with(model: resource, url: registration_path(resource_name), local: true) do |form| %>
+          <div class="field">
+            <%= form.label :name %><br />
+            <%= form.text_field :name, autofocus: true, class: 'name' %>
+          </div>
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="field">
+            <%= form.label :email %><br />
+            <%= form.email_field :email, autofocus: true, class: 'email' %>
+          </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          <div class="field">
+            <%= form.label :password %>
+            <em>(6 characters minimum)</em>
+            <br />
+            <%= form.password_field :password, autocomplete: 'off', class: 'password' %>
+          </div>
+
+          <div class="field">
+            <%= form.label :password_confirmation %><br />
+            <%= form.password_field :password_confirmation, autocomplete: 'off', class: 'password_confirm' %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit 'Sign up', class: 'btn btn-sm btn-success', data: { disable_with: 'Sign up' } %>
+          </div>
+        <% end %>
+        <%= link_to 'Log in', new_user_session_path %>
+      </div>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+</main>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+<footer>
+  <div class='container mt-5'>
+    <div class='row'>
+      <div class='mx-auto'>
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</footer>

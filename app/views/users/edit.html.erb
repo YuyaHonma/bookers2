@@ -14,23 +14,23 @@
 <%= form_with(model: current_user, url: user_path(current_user), method: :patch, local: true) do |form| %>
   <!-- 名前のフィールド -->
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name %><br>
     <%= form.text_field :name %>
   </div>
 
   <!-- 画像のアップロード -->
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
+  <%= form.label :image %><br>
+  <%= form.file_field :profile_image, id: 'Image' %>
+</div>
 
   <!-- 自己紹介文のフィールド -->
   <div class="field">
-    <%= form.label :introduction %>
+    <%= form.label :introduction %><br>
     <%= form.text_area :introduction %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Update Profile" %>
+    <%= form.submit "Update User" %>
   </div>
 <% end %>
