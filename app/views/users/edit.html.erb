@@ -1,9 +1,9 @@
-<p id="notice"></p>
-
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <h1>User info</h1>
+<main>
+ <p id="notice"></p>
+  <div class='container'>
+   <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>User info</h2>
 
       <% if @user.errors.any? %>
         <div class="alert alert-danger">
@@ -15,35 +15,30 @@
           </ul>
         </div>
       <% end %>
-
-      <table class='table'>
         <%= form_with(model: current_user, url: user_path(current_user), method: :patch, local: true, class: "edit_user_form") do |form| %>
           <!-- 名前のフィールド -->
           <div class="form-group">
-            <%= form.label :user %>
+            <%= form.label :user, "Name" %>
             <%= form.text_field :name, class: 'form-control name', placeholder: 'Enter your name' %>
           </div>
-
           <!-- 画像のアップロード -->
           <div class="form-group">
-            <%= form.label :profile_image %>
+            <%= form.label :profile_image, "Image" %>
             <%= form.file_field :profile_image, class: 'form-control-file user_image', accept: 'image/*', id: 'user_image' %>
           </div>
-
           <!-- 自己紹介文のフィールド -->
           <div class="form-group">
             <%= form.label :introduction %>
-            <%= form.text_area :introduction, class: 'form-control introduction', placeholder: 'Enter your introduction' %>
+            <%= form.text_area :introduction, class: 'form-control introduction' %>
           </div>
-
           <div class="form-group">
             <%= form.submit "Update User", class: 'btn btn-secondary', data: { disable_with: 'Update User' } %>
           </div>
         <% end %>
-      </table>
     </div>
   </div>
-</div>
+ </div>
+</main>
 <footer>
   <div class='container mt-5'>
     <div class='row'>

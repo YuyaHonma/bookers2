@@ -36,7 +36,7 @@
                 <td>
                   <% if book.user.avatar.attached? %>
                     <%= link_to(user_path(book.user)) do %>
-                      <%= image_tag(book.user.avatar.variant(resize: "80x80"), class: "img-thumbnail") %>
+                      <%= image_tag(book.user.avatar.variant(resize: "100x100"), class: "img-thumbnail") %>
                     <% end %>
                   <% else %>
                     <%= link_to(user_path(book.user)) do %>
