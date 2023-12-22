@@ -1,17 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :is_matching_login_user, only: [:edit, :update]
-
+  before_action :is_matching_login_user, only: [:edit, :update, :index, :show]
+  before_action :is_matching_login_user, except: [:index, :show]
+   
   def index
     @users = User.all
     @user = User.find(current_user.id)
   end
-
   def show
     @books = @user.books # ユーザーが投稿した本を取得
   end
 
   def edit
+    @user = current_user
     # is_matching_login_user # この行はbefore_actionで既に含まれているため不要です
     # @user = User.find(params[:id]) # この行はbefore_actionで既に含まれているため不要です
   end
